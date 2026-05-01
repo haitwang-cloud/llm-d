@@ -367,21 +367,22 @@ jobs:
               console.log(`Set Filed Date = ${filedDate}`);
             }
 
-            // Set Target Date (1st of release month)
+            // Set Target Date (23rd of month before release — code freeze deadline)
+            // v0.7 releases May 1st → code freeze April 23rd
             const targetDateField = findField('Target Date');
             if (targetDateField && release) {
-              // release = "v0.7" → May 2026, "v0.8" → Jun 2026, etc.
-              // v0.7 = May 2026 (month 5), v0.8 = Jun 2026 (month 6), ...
-              // Base: v0.7 = 2026-05-01
               const minor = parseInt(release.split('.')[1], 10);
               const baseMinor = 7;
               const baseMonth = 5;
               const baseYear = 2026;
               const monthOffset = minor - baseMinor;
-              const targetMonth = baseMonth + monthOffset;
-              const targetYear = baseYear + Math.floor((targetMonth - 1) / 12);
-              const targetMonthNorm = ((targetMonth - 1) % 12) + 1;
-              const targetDate = `${targetYear}-${String(targetMonthNorm).padStart(2, '0')}-01`;
+              const releaseMonth = baseMonth + monthOffset;
+              const CODE_FREEZE_MONTH_OFFSET = -1;
+              const CODE_FREEZE_DAY = 23;
+              const freezeMonth = releaseMonth + CODE_FREEZE_MONTH_OFFSET;
+              const targetYear = baseYear + Math.floor((freezeMonth - 1) / 12);
+              const targetMonthNorm = ((freezeMonth - 1) % 12) + 1;
+              const targetDate = `${targetYear}-${String(targetMonthNorm).padStart(2, '0')}-${CODE_FREEZE_DAY}`;
 
               await github.graphql(updateMutation, {
                 projectId: project.id,
