@@ -53,7 +53,7 @@ This guide includes configuration for the following accelerators:
 - Have the [proper client tools installed on your local system](../../helpers/client-setup/README.md) to use this guide.
 - Checkout llm-d repo:
 ```bash
-export branch="main" # branch, tag, or commit hash
+export branch="release-0.7" # branch, tag, or commit hash
 git clone https://github.com/llm-d/llm-d.git && cd llm-d && git checkout ${branch}
 ```
 - Set the following environment variables:

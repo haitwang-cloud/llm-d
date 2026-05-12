@@ -42,7 +42,7 @@ This guide supports both GPU and TPU. GPU defaults to NVIDIA H100 and TPU defaul
 - Checkout llm-d repo:
 
   ```bash
-    export branch="main" # branch, tag, or commit hash
+    export branch="release-0.7" # branch, tag, or commit hash
     git clone https://github.com/llm-d/llm-d.git && cd llm-d && git checkout ${branch}
   ```
 
